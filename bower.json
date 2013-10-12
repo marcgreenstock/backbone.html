@@ -1,0 +1,21 @@
+{
+  "name": "backbone.html",
+  "main": "backbone.html.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/marcgreenstock/backbone.html",
+  "authors": [
+    "Marc Greenstock <marc@marcgreenstock.com>"
+  ],
+  "description": "A simple Backbone plugin for using HTML as a data source instead of JSON.",
+  "keywords": [
+    "backbone",
+    "backbone.js",
+    "html"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "test",
+  ]
+}
