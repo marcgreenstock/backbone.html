@@ -1,4 +1,4 @@
-(function(root) {
+;(function(root) {
   var factory = function(target, Backbone, _) {
     target = Backbone;
 
@@ -71,7 +71,7 @@
       define(['exports','backbone','underscore'], factory);
   } else {
       // [3] No module loader (plain <script> tag) - put directly in global namespace
-      factory(Backbone, Backbone, _);
+      factory(window['Backbone'], Backbone, _);
   }
 
 }).call(this);
