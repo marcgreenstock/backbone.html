@@ -1,34 +1,30 @@
 {
-  name: "backbone.html",
-  description: "A simple Backbone plugin for using HTML as a data source instead of JSON.",
-  url: "https://github.com/marcgreenstock/backbone.html",
-  keywords: [
-    "model",
-    "view",
-    "controller",
-    "router",
-    "server",
-    "client",
-    "browser"
+  "name": "backbone.html",
+  "description": "A simple Backbone plugin for using HTML as a data source instead of JSON.",
+  "url": "https://github.com/marcgreenstock/backbone.html",
+  "keywords": [
+    "backbone",
+    "backbone.js",
+    "html"
   ],
-  author: "Marc Greenstock <marc@marcgreenstock.com>",
-  dependencies: {
-    backbone: ">=1.0.0",
-    underscore: ">=1.4.3"
+  "author": "Marc Greenstock <marc@marcgreenstock.com>",
+  "dependencies": {
+    "backbone": ">=1.0.0",
+    "underscore": ">=1.4.3"
   },
-  devDependencies: {
-    phantomjs: "1.9.0-1",
-    coffee-script: "1.6.1"
+  "devDependencies": {
+    "phantomjs": "1.9.0-1",
+    "coffee-script": "1.6.1"
   },
-  scripts: {
-    test: "phantomjs test/vendor/runner.js test/index.html?noglobals=true && coffee test/model.coffee",
-    build: "uglifyjs backbone.html.js --mangle --source-map backbone.html-min.map -o backbone.html-min.js"
+  "scripts": {
+    "test": "phantomjs test/vendor/runner.js test/index.html?noglobals=true && coffee test/model.coffee",
+    "build": "uglifyjs backbone.html.js --mangle --source-map backbone.html-min.map -o backbone.html-min.js"
   },
-  main: "backbone.html.js",
-  version: "0.0.1",
-  license: "MIT",
-  repository: {
-    type: "git",
-    url: "https://github.com:marcgreenstock/backbone.html.git"
+  "main": "backbone.html.js",
+  "version": "0.0.1",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com:marcgreenstock/backbone.html.git"
   }
 }
