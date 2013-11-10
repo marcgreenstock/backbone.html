@@ -3,6 +3,8 @@
 
 A simple Backbone plugin for using HTML as a data source instead of JSON.
 
+[![Build Status](https://travis-ci.org/marcgreenstock/backbone.html.png?branch=master)](https://travis-ci.org/marcgreenstock/backbone.html)
+
 ---
 This plugin will come in handy if you're generating HTML on the server and want to render it in a view or if the HTML is already rendered in the browser and you want to turn it in to a `Model` or `Collection`.
 
