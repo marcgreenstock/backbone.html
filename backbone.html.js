@@ -1,7 +1,5 @@
 ;(function(root) {
-  var factory = function(target, Backbone, _) {
-    target = Backbone;
-
+  var factory = function(exports, Backbone, _) {
     var originalSync = Backbone.sync;
     Backbone.sync = function(method, model, options) {
       if (options && options.success) {
@@ -58,21 +56,20 @@
         });
       }
     });
+    return exports = Backbone;
   }
   
   // Dependency management
   // Lifted from https://github.com/knockout/knockout/blob/master/build/fragments/amd-pre.js
   if (typeof require === 'function' && typeof exports === 'object' && typeof module === 'object') {
-      // [1] CommonJS/Node.js
-      var target = module['exports'] || exports; // module.exports is for Node.js
-      factory(target, require('backbone'), require('underscore'));
+    // [1] CommonJS/Node.js
+    module.exports = factory(exports, require('backbone'), require('underscore'))
   } else if (typeof define === 'function' && define['amd']) {
-      // [2] AMD anonymous module
-      define(['exports','backbone','underscore'], factory);
+    // [2] AMD anonymous module
+    define(['exports', 'backbone', 'underscore'], factory);
   } else {
-      // [3] No module loader (plain <script> tag) - put directly in global namespace
-      factory(window['Backbone'], Backbone, _);
+    // [3] No module loader (plain <script> tag) - put directly in global namespace
+    factory(root.Backbone, Backbone, _);
   }
 
-}).call(this);
-
+})(this);
