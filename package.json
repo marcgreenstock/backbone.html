@@ -9,8 +9,8 @@
   ],
   "author": "Marc Greenstock <marc@marcgreenstock.com>",
   "dependencies": {
-    "backbone": ">=1.0.0",
-    "underscore": ">=1.4.3"
+    "backbone": ">=1.1.x",
+    "underscore": ">=1.5.x"
   },
   "devDependencies": {
     "phantomjs": "1.9.0-1",
@@ -21,7 +21,7 @@
     "build": "uglifyjs backbone.html.js --mangle --source-map backbone.html-min.map -o backbone.html-min.js"
   },
   "main": "backbone.html.js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "repository": {
     "type": "git",
