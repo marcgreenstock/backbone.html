@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Backbone.HTML Demo</title>
+    <script src="./vendor/jquery.js"></script>
+    <script src="./vendor/underscore.js"></script>
+    <script src="./vendor/backbone.js"></script>
+    <script src="./vendor/backbone.html.js"></script>
+    <script>
+      App = {
+        Models: {},
+        Collections: {},
+        Views: {}
+      };
+      
+      App.Models.Item = Backbone.Model.extend();
+
+      App.Collections.Items = Backbone.Collection.extend({
+        model: App.Models.Item,
+        url: './items.html'
+      });
+      
+      App.Collections.Basket = Backbone.Collection.extend({
+        total: function() {
+          return this.reduce(function(memo, model) {
+            return memo + model.get('price');
+          }, 0);
+        }
+      });
+      
+      App.Views.MainView = Backbone.View.extend({
+        initialize: function() {
+          this.basket = new App.Collections.Basket;
+          this.itemsView = new App.Views.ItemsView({
+            el: this.$('#menu'),
+            basket: this.basket
+          });
+          this.totalView = new App.Views.TotalView({
+            el: this.$('#total'),
+            collection: this.basket
+          })
+        }
+      })
+      
+      App.Views.ItemView = Backbone.View.extend({
+        events: {
+          'click :checkbox' : 'updateBasket'
+        },
+        
+        initialize: function(options) {
+          this.basket = options.basket;
+          this.setElement(this.model.get('HTML'));
+        },
+        
+        updateBasket: function() {
+          if (this.basket.get(this.model.id)) {
+            this.basket.remove(this.model)
+          } else {
+            this.basket.add(this.model);
+          }
+        }
+      });
+      
+      App.Views.ItemsView = Backbone.View.extend({
+        initialize: function(options) {
+          this.basket = options.basket;
+          this.collection = new App.Collections.Items();
+          this.listenTo(this.collection, 'sync', this.render);
+          this.collection.fetch();
+        },
+        
+        render: function() {
+          var _this = this;
+          var itemView;
+          this.collection.each(function(model) {
+            _this.$el.append((new App.Views.ItemView({model: model, basket: _this.basket})).$el);
+          });
+        }
+        
+      });
+      
+      App.Views.TotalView = Backbone.View.extend({
+        initialize: function() {
+          this.listenTo(this.collection, 'add remove', this.render)
+          this.render();
+        },
+        
+        render: function() {
+          var total = this.collection.total();
+          
+          this.$el.html('&#163;' + (total / 100).toFixed(2));
+        }
+      });
+      
+      $(function() {
+        window.app = new App.Views.MainView({
+          el: 'body'
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h2>Menu options</h2>
+    <ul id="menu"></ul>
+    <h2>Total</h2>
+    <div id="total"></div>
+  </body>
+</html>
